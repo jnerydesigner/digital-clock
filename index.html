@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Digital Clock</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="clockMonth">14:00:00</h1>
+      <h1 class="clock">13:00:00</h1>
+      <div class="clockDayBox">
+        <h2 class="clockDay"></h2>
+      </div>
+    </div>
+    <script>
+      let yearDigitado = '2012';
+
+      function yearDigitalClock() {
+        let data = new Date();
+        let h = data.getHours();
+        let m = data.getMinutes();
+        let s = data.getSeconds();
+        let day = data.getDate();
+        let month = data.getMonth() + 1;
+
+        data = new Date('2021', month, day);
+        let year = data.getFullYear();
+
+        switch (month) {
+          case 1:
+            month = 'Janeiro';
+            break;
+          case 2:
+            month = 'Fevereiro';
+            break;
+          case 3:
+            month = 'Março';
+            break;
+          case 4:
+            month = 'Abril';
+            break;
+          case 5:
+            month = 'Maio';
+            break;
+          case 6:
+            month = 'Junho';
+            break;
+          case 7:
+            month = 'Julho';
+            break;
+          case 8:
+            month = 'Agosto';
+            break;
+          case 9:
+            month = 'Setembro';
+            break;
+          case 10:
+            month = 'Outubro';
+            break;
+          case 11:
+            month = 'Novembro';
+            break;
+          case 12:
+            month = 'Dezembro';
+            break;
+        }
+        let clockMonth = document.querySelector('.clockMonth');
+        clockMonth.innerHTML = month + ' - ' + year;
+      }
+
+      function geDayClock() {
+        let data = new Date();
+        let day = data.getDay();
+
+        switch (day) {
+          case 1:
+            day = 'Dom';
+            break;
+          case 2:
+            day = 'Seg';
+            break;
+          case 3:
+            day = 'Ter';
+            break;
+          case 4:
+            day = 'Qua';
+            break;
+          case 5:
+            day = 'Qui';
+            break;
+          case 6:
+            day = 'Sex';
+            break;
+          case 7:
+            day = 'Sab';
+            break;
+        }
+
+        let dayArr = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
+
+        for (let i = 0; i < dayArr.length; i++) {
+          let h2Day = document.createElement('h2');
+
+          if (dayArr[i] === day) {
+            h2Day.className = 'clockDayActive';
+          } else {
+            h2Day.className = 'clockDay';
+          }
+          h2Day.innerText = dayArr[i];
+          let clockDayBox = document.querySelector('.clockDayBox');
+          clockDayBox.appendChild(h2Day);
+        }
+      }
+      function getDigitalTime() {
+        let data = new Date();
+        let h = data.getHours();
+        let m = data.getMinutes();
+        let s = data.getSeconds();
+
+        if (h < 10) {
+          h = '0' + h;
+        }
+        if (m < 10) {
+          m = '0' + m;
+        }
+        if (s < 10) {
+          s = '0' + s;
+        }
+
+        let hourComplete = h + ':' + m + ':' + s;
+
+        let clock = document.querySelector('.clock');
+
+        clock.innerHTML = hourComplete;
+
+        setTimeout(getDigitalTime, 1000);
+      }
+      getDigitalTime();
+      geDayClock();
+      yearDigitalClock();
+    </script>
+  </body>
+</html>
